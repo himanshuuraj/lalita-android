@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.cliqr.lalita.MainActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/pinCodeInput"
+        android:layout_marginTop="119dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cityInput"
+        android:layout_below="@+id/pinCodeInput"
+        android:layout_alignLeft="@+id/pinCodeInput"
+        android:layout_alignStart="@+id/pinCodeInput"
+        android:layout_alignRight="@+id/pinCodeInput"
+        android:layout_alignEnd="@+id/pinCodeInput" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="PinCode"
+        android:id="@+id/pinCodeText"
+        android:layout_toLeftOf="@+id/pinCodeInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/pinCodeInput"
+        android:layout_alignBottom="@+id/cityInput" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="City"
+        android:id="@+id/cityText"
+        android:layout_below="@+id/pinCodeInput"
+        android:layout_alignRight="@+id/pinCodeText"
+        android:layout_alignEnd="@+id/pinCodeText"
+        android:layout_alignBottom="@+id/pinCodeText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stateInput"
+        android:layout_below="@+id/cityInput"
+        android:layout_alignLeft="@+id/cityInput"
+        android:layout_alignStart="@+id/cityInput"
+        android:layout_alignRight="@+id/cityInput"
+        android:layout_alignEnd="@+id/cityInput" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="State"
+        android:id="@+id/stateText"
+        android:layout_below="@+id/cityInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/stateInput"
+        android:layout_alignRight="@+id/pinCodeText"
+        android:layout_alignEnd="@+id/pinCodeText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proceed"
+        android:id="@+id/proceed"
+        android:layout_below="@+id/stateInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp" />
+</RelativeLayout>

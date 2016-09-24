@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lalita</string>
+    <string name="imageviewontop">imageviewOnTop</string>
+    <string name="hello">hello</string>
+    <string name="imageforadding">imageforadding</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="_10_kgs">10 Kgs</string>
+</resources>
