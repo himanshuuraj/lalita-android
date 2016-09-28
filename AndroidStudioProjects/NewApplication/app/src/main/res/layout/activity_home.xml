@@ -329,7 +329,8 @@
                         android:shadowRadius="5"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:contentDescription="imageForClick" />
+                        android:contentDescription="imageForClick"
+                        android:id="@+id/buttonAdd" />
 
                 </RelativeLayout>
 

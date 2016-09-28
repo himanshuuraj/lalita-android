@@ -1,5 +1,6 @@
 package com.example.cliqr.newapplication;
 
+import android.app.Dialog;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,11 +25,46 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         int k = 0;
         for(k= 1;k<100;k++) {
-            setItemInScrollView(k);
+            //setItemInScrollView(k);
         }
         for(k= 1;k<100;k++) {
             setItemInHorizontalScrollBar();
         }
+        ImageButton buttonClick = (ImageButton) findViewById(R.id.buttonAdd);
+        buttonClick.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                // Create custom dialog object
+                final Dialog dialog = new Dialog(Home.this);
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.dialog);
+                // Set dialog title
+                dialog.setTitle("Custom Dialog");
+
+                // set values for custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.textDialog);
+                text.setText("Custom dialog Android example.");
+                //ImageView image = (ImageView) dialog.findViewById(R.id.imageDialog);
+                //image.setImageResource(R.drawable.buttonshape);
+
+                dialog.show();
+
+                /*Button declineButton = (Button) dialog.findViewById(R.id.declineButton);
+                // if decline button is clicked, close the custom dialog
+                declineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Close dialog
+                        dialog.dismiss();
+                    }
+                });*/
+
+
+            }
+
+        });
     }
 
     protected void setItemInScrollView(Integer i){
