@@ -1,5 +1,8 @@
 package com.example.cliqr.newapplication;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     float x1,x2;
     float y1, y2;
     private ImageSwitcher imageSwitcher;
+    SharedPreferences sharedpreferences;
+    TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,18 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String MyPREFERENCES = "MyPrefs" ;
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        String userInfo = sharedpreferences.getString("userInfo", null);
+        userName = (TextView) findViewById(R.id.userName);
 
+        if (userInfo == "") {
+            userName.setText("WELCOME !!!");
+        }else{
+
+        }
+        userName.setText("Hello Sachin !!!");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +72,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        addElementInView();
+        for(int i = 0;i < 10;i++)
+            addElementInView();
+        TextView store = (TextView) findViewById(R.id.stores);
+        store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getBaseContext(),Home.class);
+                startActivity(i);
+            }
+        });
     }
 
     protected void addElementInView(){
@@ -146,6 +171,16 @@ public class MainActivity extends AppCompatActivity
         ll3.addView(imageView1,new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,LinearLayout.LayoutParams.FILL_PARENT
         ));
+        imageView1.setImageResource(R.drawable.addtocart);
+        imageView1.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView1.setAdjustViewBounds(true);
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getBaseContext(),Home.class);
+                startActivity(i);
+            }
+        });
         ll3.setPadding(getPixel(20),getPixel(5),getPixel(20),getPixel(5));
         imageView1.setBackgroundColor(Color.YELLOW);
         left.setBackgroundColor(Color.RED);
@@ -195,20 +230,32 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        Intent i;
+
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_trackOrder) {
+            i = new Intent(getBaseContext(),Cart.class);
+            startActivity(i);
+        } else if (id == R.id.nav_profile) {
+            i = new Intent(getBaseContext(),Cart.class);
+            startActivity(i);
+        } else if (id == R.id.nav_addresses) {
+            i = new Intent(getBaseContext(),Cart.class);
+            startActivity(i);
+        } else if (id == R.id.nav_cart) {
+            i = new Intent(getBaseContext(),Cart.class);
+            startActivity(i);
+        } /*else if (id == R.id.nav_orders) {
+            i = new Intent(getBaseContext(),Cart.class);
+            startActivity(i);
+        }*/ else if (id == R.id.nav_contactSupport) {
+            i = new Intent(getBaseContext(),Cart.class);
+            startActivity(i);
+        }else if (id == R.id.nav_logout) {
+            i = new Intent(getBaseContext(),Login.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

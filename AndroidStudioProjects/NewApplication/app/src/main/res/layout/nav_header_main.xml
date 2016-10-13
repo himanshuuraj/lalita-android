@@ -30,7 +30,7 @@
                 android:id="@+id/imageView"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/search" />
+                android:src="@drawable/passport" />
         </RelativeLayout>
 
         <RelativeLayout

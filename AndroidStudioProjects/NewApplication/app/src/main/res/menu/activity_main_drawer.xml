@@ -3,24 +3,36 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Profile" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_addresses"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Addresses" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_cart"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Cart" />
+        <!--<item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Orders" />-->
+        <item
+            android:id="@+id/nav_trackOrder"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Status of your Order" />
+        <item
+            android:id="@+id/nav_contactSupport"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Contact Support" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Logout" />
     </group>
 
-    <item android:title="Communicate">
+    <!--<item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
@@ -31,6 +43,6 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
         </menu>
-    </item>
+    </item>-->
 
 </menu>

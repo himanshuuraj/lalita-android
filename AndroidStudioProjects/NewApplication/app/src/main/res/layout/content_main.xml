@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="FIND STORES NEARBY YOUR LOCATION"
-            android:id="@+id/textView7"
+            android:id="@+id/store"
             android:gravity="center_vertical|center_horizontal" />
     </RelativeLayout>
 
@@ -53,7 +53,7 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Hello Pavan!"
-                android:id="@+id/textView2"
+                android:id="@+id/userName"
                 android:gravity="center" />
         </RelativeLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/shopping"
-                android:id="@+id/textView3"
+                android:id="@+id/shoppingInfo"
                 android:gravity="center_vertical|center_horizontal" />
         </RelativeLayout>
 
@@ -88,12 +88,12 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/what"
-                android:id="@+id/textView4"
+                android:id="@+id/stores"
                 android:gravity="center_vertical|center_horizontal" />
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_below="@+id/relativeLayout4"
@@ -111,15 +111,15 @@
             android:adjustViewBounds="true"
             android:src="@drawable/search"
             android:contentDescription="@string/what" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView"
-        android:layout_below="@+id/relativeLayout5"
-        android:layout_alignLeft="@+id/relativeLayout5"
-        android:layout_alignStart="@+id/relativeLayout5" >
+        android:layout_below="@+id/relativeLayout4"
+        android:layout_alignLeft="@+id/relativeLayout4"
+        android:layout_alignStart="@+id/relativeLayout4" >
 
         <LinearLayout
             android:orientation="vertical"
@@ -127,7 +127,7 @@
             android:layout_height="match_parent"
             android:id="@+id/layoutInScrollBar">
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -224,7 +224,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-            </LinearLayout>
+            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 
