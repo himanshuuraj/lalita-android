@@ -29,7 +29,8 @@
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Logout" />
+            android:title="Sign In/Logout"
+            android:actionViewClass="android.widget.TextView"/>
     </group>
 
     <!--<item android:title="Communicate">

@@ -25,7 +25,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/Email"
+                android:id="@+id/email"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -45,7 +45,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
-                android:text="New Button"
+                android:text="Login"
                 android:id="@+id/login"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"

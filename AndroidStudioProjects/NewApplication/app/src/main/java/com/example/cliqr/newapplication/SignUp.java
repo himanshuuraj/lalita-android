@@ -1,6 +1,8 @@
 package com.example.cliqr.newapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
@@ -26,10 +28,16 @@ public class SignUp extends AppCompatActivity {
     String password;
     String confirmPassword;
     String phoneNumber;
+
+    SharedPreferences sharedpreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        String MyPREFERENCES = "MyPrefs" ;
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
         nameEditText = (EditText) findViewById(R.id.name);
         emailEditText = (EditText) findViewById(R.id.email);
         passwordEditText = (EditText) findViewById(R.id.password);
@@ -38,8 +46,8 @@ public class SignUp extends AppCompatActivity {
         signUp = (Button) findViewById(R.id.signUp);
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(),Login.class);
-                startActivity(i);
+                Intent intent = new Intent(getBaseContext(),Login.class);
+                startActivity(intent);
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +91,11 @@ public class SignUp extends AppCompatActivity {
                 }
                 String urlString = "?name="+name+"&email="+email+"&password="+password+"&phoneNumber="+phoneNumber;
                 // make an ajax call here
-                Intent i = new Intent(getBaseContext(),Home.class);
-                startActivity(i);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                String userInfo = "{'userName' : 'Himanshu','email':'hraj3116@gmail.com'}";
+                editor.putString("userInfo",userInfo);
+                Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
     }

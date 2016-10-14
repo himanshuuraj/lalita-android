@@ -18,39 +18,48 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Home extends AppCompatActivity {
 
+    JSONObject jsonObject;
+    JSONArray jsonArrayItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        int k = 0;
-        for(k= 1;k<10;k++) {
-            setItemInScrollView(k);
+        String productData = getIntent().getExtras().getString("productDataToPass");
+        try {
+            jsonObject = new JSONObject(productData);
+            jsonArrayItems = new JSONArray(jsonObject.getString("items"));
+        }catch(Exception e){}
+        Toast.makeText(getApplicationContext(), productData, Toast.LENGTH_SHORT).show();
+        for(int index =  1; index < jsonArrayItems.length(); index++) {
+            setItemInScrollView(index);
         }
-        for(k= 1;k<10;k++) {
-            setItemInHorizontalScrollBar();
+        for(int index= 0;index<jsonArrayItems.length();index++) {
+            setItemInHorizontalScrollBar(index);
         }
         TextView store = (TextView) findViewById(R.id.stores);
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent i = new Intent(getBaseContext(),MapsActivity.class);
-                startActivity(i);*/
-                Intent i = new Intent(getBaseContext(), MapsActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+                startActivity(intent);
             }
         });
 
     }
 
-    protected void setItemInScrollView(Integer i){
+    protected void setItemInScrollView(Integer index){
         int j = 1;
         LinearLayout lSV = (LinearLayout) findViewById(R.id.lSV);
         lSV.setPadding(0,getPixel(10),0,0);
         RelativeLayout rL = (RelativeLayout) new RelativeLayout(this);
-        rL.setId(i*j++);
+        rL.setId(index*j++);
         RelativeLayout left = new RelativeLayout(this);
         RelativeLayout right= new RelativeLayout(this);
         RelativeLayout middle= new RelativeLayout(this);
@@ -66,12 +75,12 @@ public class Home extends AppCompatActivity {
         rL.addView(left,new RelativeLayout.LayoutParams(getPixel(65),RelativeLayout.LayoutParams.MATCH_PARENT));
         rL.setPadding(0,0,0,getPixel(10));
         //left.setBackgroundColor(Color.RED);
-        left.setId(i*j++);
+        left.setId(index*j++);
         RelativeLayout.LayoutParams rightP = new RelativeLayout.LayoutParams(getPixel(55),RelativeLayout.LayoutParams.MATCH_PARENT);
         rightP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         rL.addView(right,rightP);
         //right.setBackgroundColor(Color.RED);
-        right.setId(i*j++);
+        right.setId(index*j++);
         RelativeLayout.LayoutParams middleP = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
         middleP.addRule(RelativeLayout.LEFT_OF, right.getId());
         middleP.addRule(RelativeLayout.RIGHT_OF, left.getId());
@@ -84,7 +93,7 @@ public class Home extends AppCompatActivity {
         name.setText("Name");
         name.setGravity(View.TEXT_ALIGNMENT_CENTER);
         top.addView(name,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
-        top.setId(i*j++);
+        top.setId(index*j++);
         middleHorizonal.setOrientation(LinearLayout.HORIZONTAL);
         RelativeLayout.LayoutParams middleHorizontalP = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,getPixel(50));
         middleHorizontalP.addRule(RelativeLayout.BELOW, top.getId());
@@ -95,7 +104,7 @@ public class Home extends AppCompatActivity {
         middle.addView(middleHorizonal);
         middleHorizonal.addView(hSV,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
         lLHSV.setOrientation(LinearLayout.HORIZONTAL);
-        lLHSV.setId(i*j++);
+        lLHSV.setId(index*j++);
         hSV.addView(lLHSV,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
 
         RelativeLayout.LayoutParams imageButtonParam = new RelativeLayout.LayoutParams(
@@ -171,14 +180,24 @@ public class Home extends AppCompatActivity {
         });
     }
 
-    protected void setItemInHorizontalScrollBar(){
+    protected void setItemInHorizontalScrollBar(final Integer index){
+        String nameOfItem = "";
+        try {
+            nameOfItem = jsonArrayItems.getJSONObject(index).getString("name");
+        }catch(Exception e){}
         LinearLayout ll = (LinearLayout) findViewById(R.id.hSVLL);
         TextView tv = new TextView(this);
         ll.addView(tv,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.MATCH_PARENT));
         tv.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_Medium );
-        tv.setText("Medium Text");
+        tv.setText(nameOfItem);
         tv.setPadding(getPixel(10),0,0,0);
         tv.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setItemInScrollView(index);
+            }
+        });
     }
 
     protected int getPixel(int dp){
