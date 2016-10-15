@@ -29,8 +29,8 @@ public class Login extends AppCompatActivity {
         String MyPREFERENCES = "MyPrefs" ;
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        emailEditText = (EditText) findViewById(R.id.email);
-        passwordEditText = (EditText) findViewById(R.id.password);
+        emailEditText = (EditText) findViewById(R.id.addressType);
+        passwordEditText = (EditText) findViewById(R.id.firstLine);
         email = emailEditText.getText().toString();
         password = passwordEditText.getText().toString();
         login = (Button) findViewById(R.id.login);

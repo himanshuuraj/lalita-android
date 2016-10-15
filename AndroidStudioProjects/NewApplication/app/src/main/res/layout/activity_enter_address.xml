@@ -70,7 +70,7 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/email"
+                android:id="@+id/addressType"
                 android:layout_below="@+id/addressTypeText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -81,14 +81,14 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="firstLine"
                 android:id="@+id/firstLineText"
-                android:layout_below="@+id/email"
+                android:layout_below="@+id/addressType"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/password"
+                android:id="@+id/firstLine"
                 android:layout_below="@+id/firstLineText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -99,14 +99,14 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="secondLine"
                 android:id="@+id/secondLineText"
-                android:layout_below="@+id/password"
+                android:layout_below="@+id/firstLine"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/confirmPassword"
+                android:id="@+id/secondLine"
                 android:layout_below="@+id/secondLineText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -117,7 +117,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="phoneNumber"
                 android:id="@+id/phoneNumberText"
-                android:layout_below="@+id/confirmPassword"
+                android:layout_below="@+id/secondLine"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editText2"
+                android:id="@+id/email"
                 android:layout_below="@+id/emailText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -157,7 +157,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="pinCode"
                 android:id="@+id/pinCodeText"
-                android:layout_below="@+id/editText2"
+                android:layout_below="@+id/email"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -209,7 +209,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:text="Sign Up"
-                android:id="@+id/signup"
+                android:id="@+id/enterAddress"
                 android:layout_below="@+id/state"
                 android:background="#1526a3"
                 android:layout_marginBottom="30dp"/>

@@ -65,8 +65,8 @@ public class Pincode extends AppCompatActivity {
                 }
                 //make an ajax call here
                 Toast.makeText(getApplicationContext(), pinCode+" "+city+" "+state, Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(getBaseContext(),MainActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                startActivity(intent);
                 Log.v("pinCodeEditText", pinCodeEditText.getText().toString());
                 Log.v("cityEditText", cityEditText.getText().toString());
                 Log.v("stateEditText", stateEditText.getText().toString());

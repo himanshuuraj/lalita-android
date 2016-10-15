@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -39,9 +38,9 @@ public class SignUp extends AppCompatActivity {
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         nameEditText = (EditText) findViewById(R.id.name);
-        emailEditText = (EditText) findViewById(R.id.email);
-        passwordEditText = (EditText) findViewById(R.id.password);
-        confirmPasswordEditText = (EditText) findViewById(R.id.confirmPassword);
+        emailEditText = (EditText) findViewById(R.id.addressType);
+        passwordEditText = (EditText) findViewById(R.id.firstLine);
+        confirmPasswordEditText = (EditText) findViewById(R.id.secondLine);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumber);
         signUp = (Button) findViewById(R.id.signUp);
         login.setOnClickListener(new View.OnClickListener() {
