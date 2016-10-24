@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+android:orientation="horizontal" xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="40dp"
+android:layout_weight="1">
+
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="25kg"
+    android:layout_weight="1"
+    android:gravity="center_vertical|center_horizontal"
+    android:id="@+id/amount" />
+
+<ImageButton
+    android:layout_width="30dp"
+    android:layout_height="match_parent"
+    android:id="@+id/add" />
+
+<TextView
+    android:layout_width="30dp"
+    android:layout_height="match_parent"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="3"
+    android:id="@+id/quantity"
+    android:gravity="center_vertical|center_horizontal" />
+
+<ImageButton
+    android:layout_width="30dp"
+    android:layout_height="match_parent"
+    android:id="@+id/minus" />
+
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="Rs 1500"
+    android:id="@+id/totalAmount"
+    android:layout_weight="1"
+    android:gravity="center_vertical|center_horizontal" />
+</LinearLayout>

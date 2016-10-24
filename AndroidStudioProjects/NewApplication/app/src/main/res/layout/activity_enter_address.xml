@@ -208,7 +208,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:text="Sign Up"
+                android:text="Enter Address"
                 android:id="@+id/enterAddress"
                 android:layout_below="@+id/state"
                 android:background="#1526a3"

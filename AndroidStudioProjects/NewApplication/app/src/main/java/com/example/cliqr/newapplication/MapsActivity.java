@@ -15,12 +15,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     CameraUpdate cu;
+    private static final LatLng PERTH = new LatLng(-31.952854, 115.857342);
+    private static final LatLng SYDNEY = new LatLng(-33.87365, 151.20689);
+    private static final LatLng BRISBANE = new LatLng(-27.47093, 153.0235);
+
+    private Marker mPerth;
+    private Marker mSydney;
+    private Marker mBrisbane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,32 +75,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).snippet("My First App").title("Marker in Sydney\nMarker in Sydney\nMarker in Sydney\nMarker in Sydney\n"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        LatLngBounds AUSTRALIA = new LatLngBounds(
-                new LatLng(-44, 113), new LatLng(-10, 154));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(AUSTRALIA.getCenter(), 10));
+        float MAP_ZOOM_MAX = mMap.getMaxZoomLevel();
+        float MAP_ZOOM_MIN = mMap.getMinZoomLevel();
+       /* mPerth = mMap.addMarker(new MarkerOptions()
+                .position(PERTH)
+                .title("Perth"));
+        mPerth.setTag(0);
 
-        /*LatLng sydney1 = new LatLng(80, 25);
-        mMap.addMarker(new MarkerOptions().position(sydney1).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
-        /*LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(sydney);
-        final LatLngBounds bounds = builder.build();
-        int padding = 50;
-        cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                *//**set animated zoom camera into map*//*
-                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 1));
+        mSydney = mMap.addMarker(new MarkerOptions()
+                .position(SYDNEY)
+                .title("Sydney"));
+        mSydney.setTag(0);
 
-            }
-        });*/
+        mBrisbane = mMap.addMarker(new MarkerOptions()
+                .position(BRISBANE)
+                .title("Brisbane"));
+        mBrisbane.setTag(0);*/
+        double latitude = 40.738933;
 
-        //mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 2));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 15));
+        double longitude = -74.001366;
+        MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Hello Maps ");
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
+        mMap.addMarker(marker);
+       // Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
     }
 }

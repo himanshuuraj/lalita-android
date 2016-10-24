@@ -59,29 +59,37 @@ public class MainActivity extends AppCompatActivity
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         userInfo = sharedpreferences.getString("userInfo", null);
-        userInfo = "{'userName' : 'Himanshu','email':'hraj3116@gmail.com'}";
+        //userInfo = "{'userName' : 'Himanshu','email':'hraj3116@gmail.com'}";
         shoppingPinCode = sharedpreferences.getString("pinCode", null);
         userNameEditText = (TextView) findViewById(R.id.userName);
         shoppingTextView = (TextView) findViewById(R.id.shoppingInfo);
-        productData = "{'products':[{'name':'rice','image':'/src/images/rice.png','descrption':'this is rice','items':[{'name':'basmati rice','description':'Basmati is a variety of long, slender-grained aromatic rice which is traditionally from the Indian subcontinent.','brands':[{'name':'classic lalitha','shortDescription':'classic variety of basmati','image':'/src/images/rice.png','prices':{'1kg':'123','3kg':'234'}},{'name':'5kg pouch lalitha classic super','shortDescription':'Super fine variety of basmati','image':'/src/images/rice.png','prices':{'1kg':'123','3kg':'234'}}]},{'name':'BPT steam rice','description':'rice made using steam','brands':[{'name':'lalitha green super fine','shortDescription':'this is steam rice.','image':'/src/images/rice.png','prices':{'1kg':'123','3kg':'234'}},{'name':'10KGS LALITHA GREEN SUPERFINE','shortDescription':'this is steam rice available only in 10kg bags','image':'/src/images/rice.png','prices':{'1kg':'123','3kg':'234'}}]}]},{'name':'ravva','image':'/src/images/rice.png','descrption':'this is rice','items':[{'name':'Idly ravva','description':'this rava in combination with urad dal can be used to make soft idlys','brands':[{'name':'LALITHA GREEN','shortDescription':'basic variety of ravva','image':'/src/images/rice.png','prices':{'1kg':'123','3kg':'234'}},{'name':'NETAJI PINK','shortDescription':'lorem ipsum','image':'/src/images/rice.png','prices':{'1kg':'123','3kg':'234'}}]}]}]}";
-        try{
-            userInfoObject = new JSONObject(userInfo);
-            userName = userInfoObject.getString("userName");
-            JSONObject productJSONObject = new JSONObject(productData);
-            productDataObjectArray = new JSONArray(productJSONObject.getString("products"));
-        } catch (Throwable t) {
-            Log.e("My App", "Could not parse malformed JSON: ");
-        }
+        productData = sharedpreferences.getString("productData", null);
+
         if (userInfo == "" || userInfo == null) {
             userNameEditText.setText("WELCOME !!!");
         }else{
+            try{
+                userInfoObject = new JSONObject(userInfo);
+                userName = userInfoObject.getString("userName");
+                TextView userNameTextView = (TextView) findViewById(R.id.userName);
+                userNameTextView.setText(userName);
+                TextView emailTextView = (TextView) findViewById(R.id.userEmail);
+                emailTextView.setText(userInfoObject.getString("email"));
+            } catch (Throwable t) {
+                Log.e("My App", "Could not parse malformed JSON: ");
+            }
             userNameEditText.setText("Hello "+userName+" !!!");
-            shoppingPinCode = "<u>"+shoppingPinCode+"</u>";
-            shoppingTextView.setText("Shopping in " + Html.fromHtml(shoppingPinCode));
         }
+        try{
+            JSONObject productJSONObject = new JSONObject(productData);
+            productDataObjectArray = new JSONArray(productJSONObject.getString("products"));
+        }catch (Exception e){}
+        shoppingPinCode = "<u>"+shoppingPinCode+"</u>";
+        shoppingTextView.setText("Shopping in " + Html.fromHtml(shoppingPinCode));
+
         for(int i = 0; i < productDataObjectArray.length(); i++) {
             try {
-                addElementInView(new JSONObject(productDataObjectArray.getString(i)),i);
+                addElementInView(i);
             }catch(Exception e){}
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -112,7 +120,11 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    protected void addElementInView(final JSONObject jsonObject, final Integer index){
+    protected void addElementInView(final Integer index){
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = productDataObjectArray.getJSONObject(index);
+        }catch(Exception e){}
         String name = "";
         String image = "";
         String description = "";
@@ -213,7 +225,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(),Home.class);
-                intent.putExtra("productDataToPass", jsonObject.toString());
+                intent.putExtra("indexOfproductDataToPass", index.toString());
                 startActivity(intent);
             }
         });

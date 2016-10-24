@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:id="@+id/imageView"
+                android:id="@+id/userImage"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/passport" />
@@ -45,8 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Himanshu Raj"
-                android:id="@+id/textView12"
+                android:text="Himanshu"
+                android:id="@+id/userName"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
@@ -54,10 +54,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="hraj3116@gmail.com"
-                android:id="@+id/textView13"
+                android:id="@+id/userEmail"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:text="hraj3116@gmail.com" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
