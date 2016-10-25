@@ -1,11 +1,15 @@
 package com.example.cliqr.newapplication;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -42,18 +46,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                call();
-                /*Intent i = new Intent(getBaseContext(), Home.class);
-                startActivity(i);*/
+                //call();
+                Intent i = new Intent(getBaseContext(), Home.class);
+                startActivity(i);
             }
         });
 
     }
 
     private void call() {
-        Intent in=new Intent(Intent.ACTION_CALL, Uri.parse("0000000000"));
-        try{
-            startActivity(in);
+        //Intent in=new Intent(Intent.ACTION_CALL, Uri.parse("0000000000"));
+        try {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:0377778888"));
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            startActivity(callIntent);
         }
 
         catch (android.content.ActivityNotFoundException ex){
@@ -77,26 +93,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         float MAP_ZOOM_MAX = mMap.getMaxZoomLevel();
         float MAP_ZOOM_MIN = mMap.getMinZoomLevel();
-       /* mPerth = mMap.addMarker(new MarkerOptions()
-                .position(PERTH)
-                .title("Perth"));
-        mPerth.setTag(0);
-
-        mSydney = mMap.addMarker(new MarkerOptions()
-                .position(SYDNEY)
-                .title("Sydney"));
-        mSydney.setTag(0);
-
-        mBrisbane = mMap.addMarker(new MarkerOptions()
-                .position(BRISBANE)
-                .title("Brisbane"));
-        mBrisbane.setTag(0);*/
         double latitude = 40.738933;
 
         double longitude = -74.001366;
-        MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Hello Maps ");
+        MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Hello Maps");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
         mMap.addMarker(marker);
-       // Toast.makeText(getApplicationContext(), , Toast.LENGTH_SHORT).show();
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+        {
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+                if(arg0.getTitle().equals("Hello Maps")) { // if marker source is clicked
+                    final Dialog dialog = new Dialog(MapsActivity.this);
+                    dialog.setContentView(R.layout.vendorinfo);
+                    dialog.setTitle("Hello Maps");
+                    dialog.show();
+                    ImageView imageView = (ImageView) dialog.findViewById(R.id.phone);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            call();
+                        }
+                    });
+                    Toast.makeText(getApplicationContext(), arg0.getTitle(), Toast.LENGTH_SHORT).show();// display toast
+                }
+                return true;
+            }
+        });
     }
 }

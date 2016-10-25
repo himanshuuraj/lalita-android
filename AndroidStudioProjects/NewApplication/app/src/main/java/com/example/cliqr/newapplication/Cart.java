@@ -105,14 +105,14 @@ public class Cart extends AppCompatActivity {
              });
             JSONArray jsonpriceArray = jsonObject.getJSONArray("prices");
             for (int index = 0; index < jsonpriceArray.length(); index++) {
-                ImageButton add;
-                ImageButton minus;
+                ImageView add;
+                ImageView minus;
                 TextView quantityTextView, totalAmountTextView, amountTextView;
                 LinearLayout linearLayout1 = (LinearLayout) relativeLayout.findViewById(R.id.priceInfo);
                 LinearLayout linearLayout2 = (LinearLayout) getLayoutInflater().inflate(R.layout.priceinfoincart, linearLayout1, false);
                 linearLayout1.addView(linearLayout2);
-                add = (ImageButton) linearLayout2.findViewById(R.id.add);
-                minus = (ImageButton) linearLayout2.findViewById(R.id.minus);
+                add = (ImageView) linearLayout2.findViewById(R.id.add);
+                minus = (ImageView) linearLayout2.findViewById(R.id.minus);
                 quantityTextView = (TextView) linearLayout2.findViewById(R.id.quantity);
                 totalAmountTextView = (TextView) linearLayout2.findViewById(R.id.totalAmount);
                 amountTextView = (TextView) linearLayout2.findViewById(R.id.amount);  // eg 1 kg - this is fixed

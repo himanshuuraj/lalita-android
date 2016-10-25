@@ -107,7 +107,7 @@ public class Home extends AppCompatActivity {
         LinearLayout middleHorizonal = new LinearLayout(this);
         HorizontalScrollView hSV = new HorizontalScrollView(this);
         LinearLayout lLHSV = new LinearLayout(this);
-        ImageButton imageButton = new ImageButton(this);
+        ImageView imageButton = new ImageView(this);
 
         lSV.addView(rL,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,getPixel(100)));
         //rL.setBackgroundColor(Color.BLUE);
@@ -156,7 +156,7 @@ public class Home extends AppCompatActivity {
         imageButtonParam.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,rL.getId());
         imageButtonParam.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,rL.getId());
         rL.addView(imageButton,imageButtonParam);
-        imageButton.setImageResource(R.drawable.roundbutton);
+        imageButton.setImageResource(R.drawable.plus);
         imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageButton.setAdjustViewBounds(true);
         imageButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.buttonshape));
@@ -195,21 +195,23 @@ public class Home extends AppCompatActivity {
                 dialog.setTitle(finalNameOfBrand);
                 dialog.show();
                 Log.d("g","g");
-                int lengthOfPriceArray = jsonPriceArray.length();
                 LinearLayout verticalLinearLayout = (LinearLayout) dialog.findViewById(R.id.verticalLayout);
                 //verticalLinearLayout.setMinimumHeight(getPixel(50)*lengthOfPriceArray);
+                final TextView totalTextView = (TextView) dialog.findViewById(R.id.total);
+                try {
+                    int id = view.getId() - 1000;
+                    indexOfbrandInItem = id;
+                    cartData = jsonBrandArrayInItem.getJSONObject(indexOfbrandInItem);
+                    for(int k = 0;k< cartData.getJSONArray("prices").length();k++){
+                        cartData.getJSONArray("prices").getJSONObject(k).put("quantity",0);
+                        cartData.getJSONArray("prices").getJSONObject(k).put("totalAmount",0);
+                    }
+                    jsonPriceArray = jsonBrandArrayInItem.getJSONObject(indexOfbrandInItem).getJSONArray("prices");
+                }catch(Exception e){}
                 for(indexOfPriceInBrand = 0; indexOfPriceInBrand < jsonPriceArray.length(); indexOfPriceInBrand++) {
                     JSONObject priceObject = null;
                     try {
                         //put quantity
-                        int id = view.getId() - 1000;
-                        indexOfbrandInItem = id;
-                        cartData = jsonBrandArrayInItem.getJSONObject(indexOfbrandInItem);
-                        for(int k = 0;k< cartData.getJSONArray("prices").length();k++){
-                            cartData.getJSONArray("prices").getJSONObject(k).put("quantity",0);
-                            cartData.getJSONArray("prices").getJSONObject(k).put("totalAmount",0);
-                        }
-
                         priceObject = jsonPriceArray.getJSONObject(indexOfPriceInBrand);
                         LinearLayout horizontalContainer = new LinearLayout(dialog.getContext());
                         horizontalContainer.setOrientation(LinearLayout.HORIZONTAL);
@@ -221,6 +223,17 @@ public class Home extends AppCompatActivity {
                         horizontalContainer.addView(leftContainer, new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f
                         ));
+                        LinearLayout middleContainer = new LinearLayout(dialog.getContext());
+                        middleContainer.setOrientation(LinearLayout.HORIZONTAL);
+                        horizontalContainer.addView(middleContainer, new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f
+                        ));
+                        final TextView totalAmountTextView = new TextView(dialog.getContext(), null, android.R.attr.textAppearanceMedium);
+                        totalAmountTextView.setText("Rs 0");
+                        totalAmountTextView.setGravity(Gravity.CENTER);
+                        middleContainer.addView(totalAmountTextView, new RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT
+                        ));
                         LinearLayout rightContainer = new LinearLayout(dialog.getContext());
                         rightContainer.setOrientation(LinearLayout.HORIZONTAL);
                         horizontalContainer.addView(rightContainer, new LinearLayout.LayoutParams(
@@ -230,8 +243,8 @@ public class Home extends AppCompatActivity {
                         leftContainer.addView(amount, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
                         amount.setText(priceObject.getString("amount"));
                         amount.setGravity(Gravity.CENTER);
-                        ImageButton add = new ImageButton(dialog.getContext());
-
+                        ImageView add = new ImageView(dialog.getContext());
+                        add.setImageResource(R.drawable.plus);
                         rightContainer.addView(add, new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.FILL_PARENT, getPixel(50), 1.0f
                         ));
@@ -242,11 +255,13 @@ public class Home extends AppCompatActivity {
                         qtty.setText(String.valueOf(0));
                         qtty.setTextSize(20);
                         qtty.setGravity(Gravity.CENTER);
-                        ImageButton minus = new ImageButton(dialog.getContext());
+                        ImageView minus = new ImageView(dialog.getContext());
+                        minus.setImageResource(R.drawable.minus);
                         rightContainer.addView(minus, new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.FILL_PARENT, getPixel(50), 1.0f
                         ));
                         minus.setId(indexOfPriceInBrand+100);
+                        totalAmountTextView.setId(indexOfPriceInBrand+30);
                         minus.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -259,11 +274,17 @@ public class Home extends AppCompatActivity {
                                         return;
                                     qtty.setText(String.valueOf(quantity));
                                     String priceInString = cartData.getJSONArray("prices").getJSONObject(indexOfPriceInBrand).getString("price");
-                                    Integer price = Integer.parseInt(priceInString.substring(3));
+                                    Integer price = Integer.parseInt(priceInString);
                                     cartData.getJSONArray("prices").getJSONObject(indexOfPriceInBrand).put("totalAmount",quantity*price);
                                     cartData.getJSONArray("prices").getJSONObject(indexOfPriceInBrand).put("quantity",quantity);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
+                                    totalAmountTextView.setText("Rs "+String.valueOf(quantity*price));
                                     editor.putString("cartData", cartData.toString());
+                                    int total= 0;
+                                    for(int index = 0;index<cartData.getJSONArray("prices").length();index++){
+                                        total += cartData.getJSONArray("prices").getJSONObject(index).getInt("totalAmount");
+                                    }
+                                    totalTextView.setText("Rs "+String.valueOf(total));
                                     editor.commit();
                                 }catch(Exception e){}
                             }
@@ -279,12 +300,25 @@ public class Home extends AppCompatActivity {
                                     quantity++;
                                     qtty.setText(String.valueOf(quantity));
                                     cartData.getJSONArray("prices").getJSONObject(indexOfPriceInBrand).put("quantity",quantity);
+                                    String priceInString = cartData.getJSONArray("prices").getJSONObject(indexOfPriceInBrand).getString("price");
+                                    Integer price = Integer.parseInt(priceInString);
+                                    totalAmountTextView.setText("Rs "+String.valueOf(quantity*price));
+                                    cartData.getJSONArray("prices").getJSONObject(indexOfPriceInBrand).put("totalAmount",quantity*price);
                                     SharedPreferences.Editor editor = sharedpreferences.edit();
                                     editor.putString("cartData", cartData.toString());
+                                    int total= 0;
+                                    for(int index = 0;index<cartData.getJSONArray("prices").length();index++){
+                                        total += cartData.getJSONArray("prices").getJSONObject(index).getInt("totalAmount");
+                                    }
+                                    totalTextView.setText("Rs "+String.valueOf(total));
                                     editor.commit();
                                 }catch(Exception e){}
                             }
                         });
+                        TextView priceTextView = new TextView(dialog.getContext());
+                        rightContainer.addView(priceTextView, new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.FILL_PARENT, getPixel(50), 1.0f
+                        ));
                     }catch(Exception e){
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
