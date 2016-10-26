@@ -75,6 +75,8 @@ public class Cart extends AppCompatActivity {
             TextView nameOfProduct = (TextView) relativeLayout.findViewById(R.id.nameOfProduct);
             nameOfProduct.setText(jsonObject.getString("name"));
             linearLayout.addView(relativeLayout);
+            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
+            imageView.setImageResource(R.drawable.lalita);
             Button close = (Button) relativeLayout.findViewById(R.id.close);
             close.setId(500+indexOfJSONCartArray);
             TextView total = (TextView) relativeLayout.findViewById(R.id.total);

@@ -119,6 +119,11 @@ public class Home extends AppCompatActivity {
         RelativeLayout.LayoutParams rightP = new RelativeLayout.LayoutParams(getPixel(55),RelativeLayout.LayoutParams.MATCH_PARENT);
         rightP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         rL.addView(right,rightP);
+        ImageView imageViewOfProduct = new ImageView(this);
+        left.addView(imageViewOfProduct, new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT
+        ));
+        imageViewOfProduct.setImageResource(R.drawable.lalita);
         //right.setBackgroundColor(Color.RED);
         right.setId(10*indexOfItemInProduct+index);
         index++;

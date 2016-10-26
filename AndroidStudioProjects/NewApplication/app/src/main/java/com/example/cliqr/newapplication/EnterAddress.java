@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -98,6 +100,13 @@ public class EnterAddress extends AppCompatActivity {
                 String allAddress = "";
                 editor.putString("userInfo", allAddress);
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageView map = (ImageView) findViewById(R.id.map);
+        map.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), MapsActivity.class);
                 startActivity(intent);
             }
         });

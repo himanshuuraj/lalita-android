@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity
         insideLL.addView(imageButton,new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.FILL_PARENT
         ));
+        imageButton.setImageResource(R.drawable.lalita);
         LinearLayout rightVertical = new LinearLayout(this);
         rightVertical.setOrientation(LinearLayout.VERTICAL);
         right.addView(rightVertical,new LinearLayout.LayoutParams(

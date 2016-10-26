@@ -213,6 +213,16 @@
                 android:layout_below="@+id/state"
                 android:background="#1526a3"
                 android:layout_marginBottom="30dp"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/map"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/map" />
+
         </RelativeLayout>
     </ScrollView>
 
